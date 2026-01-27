@@ -1,23 +1,581 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+
+  <!-- Schema.org JSON-LD for Search Engine Optimization -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "촌집리모델링 서비스 및 비용 견적",
+      "serviceType": "촌집리모델링",
+      "provider": {
+        "@type": "Organization",
+        "name": "전국 촌집리모델링 전문 업체",
+        "url": "https://yourdomain.com",
+        "description": "전국 촌집리모델링, 농가주택 개조 전문 서비스 제공"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "대한민국 전역",
+        "description": "서울, 경기, 강원, 충청, 경상, 전라, 제주 등 전국"
+      },
+      "description": "노후된 촌집을 새롭게 개조하는 리모델링 서비스. 합리적인 가격으로 안전하고 쾌적한 주거 공간을 제공합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "촌집리모델링 패키지 및 가격 정보",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "부분 리모델링 (최소 비용)"
+            },
+            "price": "5000000",
+            "priceCurrency": "KRW",
+            "description": "주방, 욕실 등 특정 공간만 리모델링하는 패키지 (평균 예상 금액)"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "전체 리모델링 (중급 비용)"
+            },
+            "price": "20000000",
+            "priceCurrency": "KRW",
+            "description": "단열, 창호 교체 등 전체적인 수리를 포함한 패키지 (평균 예상 금액)"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "구조 변경 포함 전체 리모델링 (고급 비용)"
+            },
+            "price": "40000000",
+            "priceCurrency": "KRW",
+            "description": "기초 보강 및 구조 변경을 포함한 프리미엄 패키지 (평균 예상 금액)"
+          }
+        ]
+      }
+    }
+  </script>
+
+  <!-- Google Fonts for better readability (Noto Sans KR) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+
+  <style>
+    /* Reset and Typography */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      background-color: #f7f5f2; /* Soft beige background */
+      color: #333;
+    }
+    a {
+      color: #004d40; /* Deep forest green accent */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #a0522d; /* Sienna brown accent on hover */
+    }
+
+    /* Header and Navigation */
+    header {
+      background-color: #004d40; /* Deep forest green */
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+    header p {
+      margin-top: 0;
+      font-weight: 300;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    nav a {
+      color: white;
+      font-weight: 500;
+      font-size: 1.1rem;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 0.2rem;
+    }
+    nav a:hover {
+      color: #ffcc80; /* Light orange for contrast */
+      border-bottom: 2px solid #ffcc80;
+    }
+
+    /* Main Content Layout */
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background-color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border-radius: 10px;
+    }
+    section {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px dashed #eee;
+    }
+    section:last-child {
+      border-bottom: none;
+    }
+    h2 {
+      color: #004d40;
+      font-size: 2rem;
+      border-bottom: 3px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+      margin-top: 0;
+    }
+    h3 {
+      color: #a0522d;
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+      border-left: 5px solid #a0522d;
+      padding-left: 1rem;
+    }
+    p {
+      text-align: justify;
+    }
+
+    /* Keyword Tags */
+    .keyword-tags {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .keyword-tags a {
+      background-color: #e8f5e9; /* Light green for tags */
+      color: #004d40;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      font-weight: 500;
+    }
+    .keyword-tags a:hover {
+      background-color: #c8e6c9;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+      background-color: #fcfcfc;
+    }
+    th, td {
+      padding: 1rem;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #e8f5e9;
+      color: #333;
+      font-weight: 700;
+      text-align: center;
+    }
+    td strong {
+      color: #a0522d;
+    }
+
+    /* FAQ Accordion */
+    .faq-item {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background-color: #f9f9f9;
+    }
+    .faq-question {
+      background-color: #f0f4f7;
+      color: #004d40;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      border-radius: 8px 8px 0 0;
+      transition: background-color 0.3s;
+    }
+    .faq-question:hover {
+      background-color: #e0eaf1;
+    }
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+    }
+    .faq-question.active::after {
+      content: '-';
+    }
+    .faq-answer {
+      padding: 1rem 1.5rem;
+      margin: 0;
+      border-top: 1px solid #e0e0e0;
+      display: none;
+    }
+    .faq-answer p {
+      margin: 0;
+    }
+
+    /* CTA Button and Form */
+    .cta-button {
+      display: inline-block;
+      background-color: #a0522d; /* Sienna brown accent */
+      color: white;
+      font-weight: 700;
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      margin: 1rem 0;
+      transition: background-color 0.3s ease;
+      font-size: 1.1rem;
+      display: block;
+      width: fit-content;
+      margin: 2rem auto;
+    }
+    .cta-button:hover {
+      background-color: #8b4513;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #004d40;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #e8e8e8;
+      margin-top: 2rem;
+      line-height: 1.6;
+    }
+
+    /* Graph (Placeholder for visual optimization) */
+    .graph-placeholder {
+      width: 100%;
+      height: 300px;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      main {
+        margin: 1rem auto;
+      }
+      section {
+        padding: 1rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      h3 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>촌집리모델링 비용, 2026년 완벽 가이드</h1>
+    <p>오래된 시골집을 위한 맞춤형 리모델링 견적, 장단점, 시공 사례 비교 분석</p>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#intro">촌집 리모델링 개요</a></li>
+        <li><a href="#cost">비용 견적 분석</a></li>
+        <li><a href="#process">시공 과정 및 장단점</a></li>
+        <li><a href="#region">지역별 시공업체</a></li>
+        <li><a href="#faq">자주 묻는 질문</a></li>
+        <li><a href="#contact">견적 문의</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h2>촌집 리모델링, 왜 지금 해야 할까요?</h2>
+      <p>최근 '전원생활'에 대한 관심이 높아지면서 노후된 촌집이나 농가주택을 매입하여 리모델링하는 수요가 증가하고 있습니다. 촌집 리모델링은 단순히 외관을 꾸미는 것을 넘어, 노후된 주택의 고질적인 문제점들을 해결하고 주거 성능을 향상시키는 데 목적이 있습니다. 특히 2026년 현재, 에너지 효율 향상과 관련된 정부 지원 정책과 맞물려 리모델링에 대한 관심이 더욱 뜨겁습니다.</p>
+      <p>촌집 리모델링의 가장 큰 장점은 신축 주택 대비 <strong>저렴한 비용</strong>으로 자신만의 개성이 담긴 주거 공간을 확보할 수 있다는 점입니다. 또한, 시골집이 가진 특유의 정취와 공간감을 유지하면서 현대적인 편리함을 더할 수 있다는 매력이 있습니다. 하지만 촌집 리모델링은 일반 아파트 리모델링과는 달리, <strong>구조 보강</strong>, <strong>단열 작업</strong>, <strong>방수 문제</strong> 등 고려해야 할 변수가 많아 전문적인 지식이 필수적입니다. 이 글에서는 2026년 기준 촌집 리모델링의 평균 비용, 시공 과정별 유의사항, 그리고 합리적인 견적을 받는 방법까지 상세하게 다룹니다.</p>
+
+      <div class="keyword-tags" aria-label="연관 키워드">
+        <a href="#cost">촌집리모델링 비용</a>
+        <a href="#cost">촌집 리모델링 견적</a>
+        <a href="#process">시골집 리모델링 장단점</a>
+        <a href="#process">농가주택 리모델링 주의사항</a>
+        <a href="#region">전국 촌집리모델링 업체 순위</a>
+        <a href="#review">촌집리모델링 내돈내산 후기</a>
+        <a href="#cost">2026년 리모델링 가격</a>
+        <a href="#process">촌집 구조변경</a>
+        <a href="#region">저렴한 촌집리모델링 싼곳</a>
+      </div>
+    </section>
+
+    <section id="cost">
+      <h2>촌집리모델링 비용 분석: 2026년 평균 견적 및 가격 결정 요인</h2>
+      <p>촌집리모델링 비용은 주택의 노후도, 평수, 시공 범위(전체 또는 부분), 그리고 자재 선택에 따라 크게 달라집니다. '평당 얼마'라는 단순한 공식으로는 정확한 견적을 산출하기 어렵습니다. 2026년 현재, 일반적으로 촌집 리모델링의 평균 예상 금액은 평당 150만원에서 300만원 이상으로 형성되지만, 노후 정도에 따라 50만원에서 500만원까지 편차가 발생합니다.</p>
+
+      <h3>1. 비용 결정의 핵심 변수: 주택의 기본 상태</h3>
+      <p>촌집은 건축 시기, 건축 방식, 사용된 자재에 따라 상태가 천차만별입니다. 특히 30년 이상 된 주택은 단순히 겉모습만 바꾸는 '인테리어'가 아닌, 집의 기능을 회복시키는 '리노베이션'이 필요합니다.</p>
+      <ul>
+        <li><strong>단열 및 방수 상태:</strong> 촌집의 가장 큰 문제 중 하나는 단열 불량입니다. 창호 교체와 벽체 단열 보강은 겨울철 난방비 절감에 필수적입니다. 단열재 종류와 두께에 따라 비용이 크게 달라집니다.</li>
+        <li><strong>구조 안전성:</strong> 촌집은 종종 습기에 의한 목재 부식이나 지반 침하로 인해 구조적인 문제가 발생할 수 있습니다. 전문가의 진단을 통해 기초 보강 또는 뼈대 보강이 필요하다면 추가적인 비용이 발생합니다.</li>
+        <li><strong>설비 노후도 (배관, 전기):</strong> 오래된 촌집은 상수도, 하수도 배관이 노후되어 누수 문제가 흔하며, 전기 배선도 현대 생활에 적합하지 않은 경우가 많습니다. 배관과 전기 공사를 전면 교체하는 경우 비용 상승의 주요 원인이 됩니다.</li>
+      </ul>
+
+      <h3>2. 2026년 촌집리모델링 예상 견적 비교 (시공 범위별)</h3>
+      <p>다음 표는 2026년 기준, 촌집리모델링의 일반적인 시공 범위에 따른 평균 예상 비용을 비교한 것입니다. 이는 참고 자료일 뿐, 실제 견적은 현장 조사 후 달라질 수 있습니다.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>주요 작업 내용</th>
+            <th>평균 예상 금액 (10~20평 기준)</th>
+            <th>특징 및 장단점</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>부분 수리 (최소 비용)</strong></td>
+            <td>도배, 장판 교체, 주방/욕실 부분 리모델링, 노후 설비 일부 교체</td>
+            <td>500만원 ~ 1,500만원</td>
+            <td><strong>장점:</strong> 저렴한 가격, 빠른 공사 기간. <strong>단점:</strong> 근본적인 단열 문제 해결 불가, 미관 개선에 집중.</td>
+          </tr>
+          <tr>
+            <td><strong>전체 리모델링 (중급 비용)</strong></td>
+            <td>단열 보강(벽체, 천장), 창호 전체 교체, 전체 설비 교체, 내부 인테리어 전체</td>
+            <td>1,500만원 ~ 3,000만원</td>
+            <td><strong>장점:</strong> 주거 쾌적성 대폭 향상, 난방비 절감 효과. <strong>단점:</strong> 공사 범위가 넓어짐에 따라 비용 부담 증가.</td>
+          </tr>
+          <tr>
+            <td><strong>구조 변경 및 보강 (고급 비용)</strong></td>
+            <td>기초 보강, 벽체 철거 및 신설, 지붕 보강, 전체 리모델링 포함</td>
+            <td>3,000만원 ~ 5,000만원 이상</td>
+            <td><strong>장점:</strong> 원하는 대로 공간 재구성 가능, 신축에 가까운 내구성 확보. <strong>단점:</strong> 시공 난이도와 비용이 가장 높음.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. 촌집리모델링의 숨겨진 비용: 철거 및 폐기물 처리</h3>
+      <p>촌집 리모델링 시 간과하기 쉬운 항목이 철거 및 폐기물 처리 비용입니다. 특히 촌집은 석면을 포함한 경우가 있어 관련 법규에 따라 전문 업체가 폐기물 처리를 해야 합니다. <a href="https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=262386&ancYn=Y" target="_blank" rel="nofollow noreferrer">석면 안전관리법</a>에 따라 석면이 포함된 자재를 철거할 때는 반드시 등록된 업체에 의뢰해야 하며, 이 비용이 전체 견적에서 상당 부분을 차지할 수 있습니다. <a href="https://www.me.go.kr/home/web/main.do" target="_blank" rel="nofollow noreferrer">환경부 폐기물 관리법</a>에 의거하여 폐기물 처리 비용은 매년 상승하는 추세이므로, 2026년 리모델링 계획 시 사전에 충분히 고려해야 합니다.</p>
+    </section>
+
+    <section id="process">
+      <h2>촌집리모델링 시공 과정: 장점과 단점, 그리고 성공적인 시공을 위한 차이점 분석</h2>
+      <p>성공적인 촌집리모델링은 신중한 계획과 전문적인 시공 과정이 중요합니다. 촌집은 단순히 인테리어 마감재를 바꾸는 것이 아니라, 집의 뼈대부터 다시 살리는 작업이므로 단계별로 꼼꼼하게 진행되어야 합니다.</p>
+
+      <h3>1. 촌집리모델링의 핵심 공정</h3>
+      <ul>
+        <li><strong>기획 및 진단 (사전조사):</strong> 가장 중요한 단계입니다. 건축 전문가와 함께 현장을 방문하여 주택의 노후도, 구조적인 문제(균열, 침하 등), 습기 발생 여부, 단열 상태 등을 정확하게 진단해야 합니다. 촌집의 '장점'인 넓은 마당이나 텃밭을 활용할 계획이라면 외부 동선도 함께 고려해야 합니다.</li>
+        <li><strong>철거 및 기초 보강:</strong> 기존 구조에서 문제가 있는 부분을 철거하고, 지반 침하가 의심될 경우 기초를 보강하는 작업을 진행합니다. 이는 촌집리모델링의 '단점'이자 '차이점'인 부분으로, 신축이나 아파트 인테리어에서는 거의 발생하지 않는 공정입니다.</li>
+        <li><strong>단열 및 방수 작업:</strong> 촌집의 가장 큰 고질병인 단열 문제를 해결합니다. 벽체 내부 단열재(스티로폼, 우레탄폼 등) 삽입 및 외부 마감재 시공, 창호 교체 등이 포함됩니다. <a href="https://www.molit.go.kr/portal/main.do" target="_blank" rel="nofollow noreferrer">국토교통부 건축물 에너지 효율 기준</a>에 맞춰 단열 공사를 진행하면 난방비를 획기적으로 절감할 수 있습니다.</li>
+        <li><strong>인테리어 마감:</strong> 내부 공간의 마감재(도배, 바닥재), 가구(주방, 붙박이장), 조명 설치 등을 진행합니다. 이때, 촌집의 장점을 살려 목재나 자연석 등 친환경적인 자재를 사용하여 쾌적한 공간을 연출할 수 있습니다.</li>
+      </ul>
+
+      <h3>2. 촌집리모델링 vs 신축: 장단점 비교</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>촌집 리모델링</th>
+            <th>신축 (재건축)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>비용</strong></td>
+            <td><strong>상대적으로 저렴함.</strong> (단, 구조 보강 필요 시 비용 상승)</td>
+            <td><strong>상대적으로 비쌈.</strong> (철거비, 인허가 비용, 건축비 모두 발생)</td>
+          </tr>
+          <tr>
+            <td><strong>기간</strong></td>
+            <td>보통 1~3개월 (공정 범위에 따라 달라짐)</td>
+            <td>보통 3~6개월 (인허가 기간 포함)</td>
+          </tr>
+          <tr>
+            <td><strong>장점</strong></td>
+            <td>신속한 공사, 기존 대지의 매력 유지, 세금 혜택 (신축 대비)</td>
+            <td>새로운 설계 적용 가능, 완벽한 구조 안전성, 에너지 효율 극대화</td>
+          </tr>
+          <tr>
+            <td><strong>단점</strong></td>
+            <td>예상치 못한 문제 발생 가능성 높음, 구조 변경의 제약, 건물 노후화 근본적 해결 어려움</td>
+            <td>높은 초기 비용, 인허가 절차 복잡, 촌집 특유의 감성 소실</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. 촌집리모델링 성공을 위한 팁: 저렴한곳 vs 전문성</h3>
+      <p>단순히 '저렴한곳'을 찾기보다 촌집리모델링 경험이 많은 전문 업체를 선정하는 것이 중요합니다. 촌집은 숨겨진 하자가 많아 비전문가에게 맡기면 공사 완료 후에도 누수, 결로, 곰팡이 등 여러 문제가 발생할 수 있습니다. <strong>'내돈내산' 후기</strong>와 <strong>포트폴리오</strong>를 꼼꼼히 확인하여, 특히 단열 및 방수 분야에 강점을 가진 업체를 선택하는 것이 현명합니다.</p>
+      <div class="graph-placeholder" aria-label="촌집리모델링 비용 절감 요인 그래프">
+        <p>※ 참고: 촌집리모델링 비용 절감 요인 (시공 범위 대비 만족도 분석 그래프)</p>
+      </div>
+    </section>
+
+    <section id="region">
+      <h2>전국 촌집리모델링 시공 지역별 평균 가격 및 업체 추천</h2>
+      <p>촌집 리모델링은 지역별 인건비와 자재 운반비에 따라 견적 금액 차이가 발생합니다. 또한, 지역별로 활발하게 활동하는 전문 업체가 존재하므로, 해당 지역에 특화된 업체와의 협업이 중요합니다. 다음은 전국 주요 지역별 촌집리모델링 시장 동향 및 '함께 많이 찾는' 키워드입니다.</p>
+
+      <h3>1. 서울/경기 수도권 촌집리모델링</h3>
+      <p>수도권 인근의 촌집(양평, 가평, 강화 등)은 전원생활의 수요가 높아 리모델링 수요가 꾸준합니다. 특히, <strong>서울 근교 촌집리모델링</strong>은 주말 주택용으로 인기가 많으며, <strong>경기 촌집리모델링 비용</strong>은 신축 대비 저렴한 가격으로 수도권 생활을 이어가려는 사람들에게 매력적입니다. <strong>경기 광주 촌집리모델링</strong>, <strong>양평 촌집리모델링</strong> 등은 상대적으로 인테리어 트렌드에 민감하며, 고급 자재를 선호하는 경향이 있습니다. <strong>김포 촌집리모델링</strong>과 <strong>파주 촌집리모델링</strong>은 접근성을 중시하며, <strong>촌집리모델링 평당 단가</strong>가 비교적 높은 편입니다.</p>
+
+      <h3>2. 강원도 촌집리모델링</h3>
+      <p>강원도는 험준한 지형과 추운 기후 특성상 단열과 난방에 대한 고려가 필수적입니다. <strong>강원도 촌집리모델링</strong>은 <strong>단열재 시공</strong>이 핵심이며, <strong>강릉 촌집리모델링</strong>, <strong>속초 촌집리모델링</strong> 등 동해안 지역은 해풍으로 인한 염해 방지 대책이 중요합니다. <strong>횡성 촌집리모델링</strong>, <strong>평창 촌집리모델링</strong>은 겨울철 영하의 기온에 대비한 보일러 교체 및 단열 시공이 <strong>예상 비용</strong>에 큰 비중을 차지합니다. <strong>춘천 촌집리모델링</strong>은 수도권과의 접근성으로 인해 수요가 높습니다.</p>
+
+      <h3>3. 충청도 촌집리모델링</h3>
+      <p><strong>충남 촌집리모델링</strong>, <strong>충북 촌집리모델링</strong>은 농가주택 수요가 많으며, <strong>대전 촌집리모델링</strong> 주변 지역은 전원생활을 위한 실거주 목적의 리모델링이 활발합니다. <strong>세종 촌집리모델링</strong>, <strong>천안 촌집리모델링</strong> 지역은 <strong>저렴한 촌집리모델링 싼곳</strong>을 찾는 수요와 동시에 고급 인테리어를 원하는 수요가 공존합니다. <strong>청주 촌집리모델링</strong>은 <strong>촌집 수리 비용</strong>에 대한 문의가 많으며, <strong>평균 가격</strong> 대비 만족도를 중요하게 생각합니다.</p>
+
+      <h3>4. 경상도 촌집리모델링</h3>
+      <p><strong>경남 촌집리모델링</strong>, <strong>경북 촌집리모델링</strong> 지역은 넓은 부지를 가진 촌집이 많아, 리모델링과 동시에 증축을 고려하는 경우가 많습니다. <strong>부산 촌집리모델링</strong>, <strong>울산 촌집리모델링</strong> 주변은 노후 주택 개조에 대한 관심이 높습니다. <strong>대구 촌집리모델링</strong>, <strong>김해 촌집리모델링</strong>은 <strong>농가주택 리모델링</strong> 시공 사례를 꼼꼼히 비교하여 <strong>가성비 좋은 업체</strong>를 찾으려는 경향이 강합니다. <strong>포항 촌집리모델링</strong>은 바닷가 인근 주택의 방수 및 방염 처리에 대한 <strong>견적 문의</strong>가 많습니다.</p>
+
+      <h3>5. 전라도 촌집리모델링</h3>
+      <p><strong>전남 촌집리모델링</strong>, <strong>전북 촌집리모델링</strong>은 아름다운 자연 환경과 어우러진 주택 개조가 인기입니다. <strong>광주 촌집리모델링</strong>, <strong>순천 촌집리모델링</strong>, <strong>여수 촌집리모델링</strong>은 관광 수요와 연계하여 펜션이나 숙박 시설로 리모델링하는 경우도 많습니다. <strong>전주 촌집리모델링</strong>은 한옥 스타일의 리모델링 <strong>사례 비교</strong>가 활발합니다. <strong>촌집리모델링 추천</strong> 키워드로 검색 시 해당 지역의 시공 경력을 우선시해야 합니다.</p>
+
+      <h3>6. 제주도 촌집리모델링</h3>
+      <p><strong>제주도 촌집리모델링</strong>은 육지와는 다른 기후 조건과 자재 운반비로 인해 <strong>평균 비용</strong>이 높게 형성됩니다. <strong>제주 촌집리모델링</strong>은 습기와 염해에 강한 자재 선택이 필수적이며, <strong>제주 농가주택 리모델링</strong> 시 <strong>단열재 종류 차이점</strong>을 꼼꼼히 확인해야 합니다. <strong>제주 촌집리모델링 가격</strong>은 육지 대비 10~20% 높을 수 있습니다.</p>
+    </section>
+
+    <section id="faq">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">촌집리모델링과 인테리어의 차이점은 무엇인가요?</div>
+          <div class="faq-answer">
+            <p><strong>리모델링</strong>은 건축물의 구조나 기능적인 부분(단열, 방수, 설비)을 개선하는 것을 포함합니다. 반면 <strong>인테리어</strong>는 내부 마감재나 가구 배치 등 미적인 부분에 중점을 둡니다. 촌집은 인테리어보다는 리모델링이 필수적이며, 뼈대부터 점검해야 합니다.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">정부나 지자체에서 촌집리모델링 지원금을 받을 수 있나요?</div>
+          <div class="faq-answer">
+            <p>네, 가능성이 있습니다. <a href="https://www.ehub.go.kr/main.do" target="_blank" rel="nofollow noreferrer">정부 그린리모델링 사업</a>과 <a href="https://www.k-apt.go.kr/" target="_blank" rel="nofollow noreferrer">농림축산식품부 농어촌 주택 개량사업</a> 등을 통해 저금리 융자 지원을 받을 수 있습니다. 특히 에너지 효율 개선을 위한 단열, 창호 교체 공사는 지원 대상이 될 확률이 높습니다. 2026년 기준 지원 사업 내용을 확인해보는 것이 좋습니다.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">촌집리모델링 시공업체 선정 시 주의해야 할 '장단점'은 무엇인가요?</div>
+          <div class="faq-answer">
+            <p>시공업체 선정 시 포트폴리오(시공 사례)와 '내돈내산' 후기를 반드시 확인해야 합니다. <strong>장점</strong>이 명확한 업체는 단열 시공이나 방수 공사에 특화된 노하우를 보유하고 있습니다. <strong>단점</strong>은 비용이 너무 저렴한 곳은 자재 등급을 낮추거나 필수 공정을 생략할 위험이 있다는 것입니다. 최소 3곳 이상의 업체에서 견적을 받고 비교하는 것이 좋습니다.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">촌집리모델링 후 발생하는 하자는 어떻게 보장받나요?</div>
+          <div class="faq-answer">
+            <p>계약서 작성 시 하자보수 기간과 범위를 명확히 규정해야 합니다. 일반적으로 주택 리모델링의 하자보수 기간은 1~2년이며, 중요한 구조 부분이나 방수, 설비 등에 대한 보증 기간을 확인해야 합니다. 구두 계약은 피하고 서면으로 증거를 남겨야 합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>촌집리모델링 견적 문의 및 무료 상담</h2>
+      <p>고객님의 촌집 상태에 따른 정확한 진단과 합리적인 견적을 받아보세요. 노후된 촌집은 숨겨진 변수가 많기 때문에, 경험 많은 전문가와의 상담이 필수적입니다.</p>
+
+      <form action="/submit_form" method="POST">
+        <div class="form-group">
+          <label for="name">성함</label>
+          <input type="text" id="name" name="name" required placeholder="예: 홍길동">
+        </div>
+        <div class="form-group">
+          <label for="phone">연락처</label>
+          <input type="tel" id="phone" name="phone" required placeholder="예: 010-1234-5678">
+        </div>
+        <div class="form-group">
+          <label for="region_select">시공 희망 지역 (선택)</label>
+          <select id="region_select" name="region" required>
+            <option value="">지역을 선택해주세요</option>
+            <option value="서울">서울</option>
+            <option value="경기">경기</option>
+            <option value="강원">강원</option>
+            <option value="충북">충북</option>
+            <option value="충남">충남</option>
+            <option value="경북">경북</option>
+            <option value="경남">경남</option>
+            <option value="전북">전북</option>
+            <option value="전남">전남</option>
+            <option value="제주">제주</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="size">주택 평수 (대략적)</label>
+          <input type="number" id="size" name="size" required placeholder="예: 20">
+        </div>
+        <div class="form-group">
+          <label for="details">상세 문의 내용 (리모델링 희망 범위 등)</label>
+          <textarea id="details" name="details" rows="5" placeholder="예: 전체 리모델링을 원하며, 특히 단열 보강을 중시합니다."></textarea>
+        </div>
+        <button type="submit" class="cta-button">무료 견적 요청하기</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // FAQ 아코디언 기능 (접기/펼치기)
+    document.querySelectorAll('.faq-question').forEach((question) => {
+      question.addEventListener('click', () => {
+        // Close other open answers
+        document.querySelectorAll('.faq-question').forEach((otherQuestion) => {
+          if (otherQuestion !== question) {
+            otherQuestion.classList.remove('active');
+            otherQuestion.nextElementSibling.style.display = 'none';
+          }
+        });
+
+        // Toggle current answer
+        question.classList.toggle('active');
+        const answer = question.nextElementSibling;
+        if (answer.style.display === 'block') {
+          answer.style.display = 'none';
+        } else {
+          answer.style.display = 'block';
+        }
+      });
+    });
+  </script>
+
+
+  
